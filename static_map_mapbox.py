@@ -17,7 +17,7 @@ positionstack_key = os.getenv('POSITIONSTACK_KEY')
 mapbox_key = os.getenv('MAPBOX_KEY')
 
 
-def get_static_map_request(place_data):
+def get_map_req_url(place_data):
     """Does this"""
     adjustable_comp = {'sat': 1, 'longi': 3, 'lati': 5, 'zoom': 7, 'size': 10}
     url_components = [
@@ -83,5 +83,5 @@ if __name__ == '__main__':
         'poi_name': 'AT&T Stadium',
         'location': 'Arlington, Texas, United States'
     }
-    req_url_map = get_static_map_request(data)
+    req_url_map = get_map_req_url(data)
     print(req_url_map)

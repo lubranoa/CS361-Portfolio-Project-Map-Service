@@ -17,7 +17,19 @@ positionstack_key = os.getenv('POSITIONSTACK_KEY')
 google_key = os.getenv('GOOGLE_KEY')
 
 
-def get_map_request(place_data):
+def get_iframe(place_data):
+    """Does this"""
+
+    iframe_components = [
+        '<iframe width="400" height="300" style="border:0" loading="lazy" allowfullscreen src=',
+        '',
+        '></iframe>'
+    ]
+    iframe_components[1] = get_map_req_url(place_data)
+    return ''.join(iframe_components)
+
+
+def get_map_req_url(place_data):
     """Does this"""
     adjustable_comp = {'lati': 3, 'longi': 5, 'zoom': 7, 'sat': 9}
     url_components = [
@@ -79,5 +91,5 @@ if __name__ == '__main__':
         'poi_name': 'AT&T Stadium',
         'location': 'Arlington, Texas, United States'
     }
-    req_url_map = get_map_request(data)
+    req_url_map = get_iframe(data)
     print(req_url_map)
