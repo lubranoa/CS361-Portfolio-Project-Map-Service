@@ -13,7 +13,7 @@ import urllib.parse
 import json
 
 load_dotenv()
-opencage_key = os.getenv('POSITIONSTACK_KEY')
+positionstack_key = os.getenv('POSITIONSTACK_KEY')
 mapbox_key = os.getenv('MAPBOX_KEY')
 
 
@@ -49,7 +49,7 @@ def get_static_map_request(place_data):
 def get_coordinates(place_data: dict):
     """Does this"""
     params = {
-        'access_key': opencage_key,
+        'access_key': positionstack_key,
         'query': place_data['poi_name'],
         'region': place_data['location'],
         'limit': 1
