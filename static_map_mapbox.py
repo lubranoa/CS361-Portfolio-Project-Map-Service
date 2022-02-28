@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------
 # Author: Alexander Lubrano
 # Course: CS 361 - Software Engineering I
-# Last Modified: 02/24/2022
+# Last Modified: 02/27/2022
 # Description: This program
 #
 # -----------------------------------------------------------------------------
@@ -19,28 +19,20 @@ mapbox_key = os.getenv('MAPBOX_KEY')
 
 def get_map_req_url(place_data):
     """Does this"""
-    adjustable_comp = {'sat': 1, 'longi': 3, 'lati': 5, 'zoom': 7, 'size': 10}
     url_components = [
-        'https://api.mapbox.com/styles/v1/mapbox/',
-        'satellite-streets-v11',
-        '/static/',
+        'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/static/',
         '',
         ',',
         '',
-        ',',
-        '15'
-        ',',
-        '0/',
-        '400x300',
-        '?access_token=',
+        ',15,0/400x300?access_token=',
         mapbox_key
     ]
     poi_coord = get_coordinates(place_data)
     print(poi_coord)
     print(type(poi_coord['lon']))
 
-    url_components[adjustable_comp['longi']] = str(poi_coord['lon'])
-    url_components[adjustable_comp['lati']] = str(poi_coord['lat'])
+    url_components[1] = str(poi_coord['lon'])
+    url_components[3] = str(poi_coord['lat'])
 
     req_url = ''.join(url_components)
     return req_url
