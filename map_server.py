@@ -8,11 +8,12 @@
 
 import socket
 import threading
+from static_map_mapbox import get_map_req_url
 
 MSG_SIZE = 2048
 FORMAT = 'utf-8'
 HOST = socket.gethostbyname(socket.gethostname())
-PORT = 5050
+PORT = 5678
 DISCONNECT_MSG = "!DISCONNECT"
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,9 +30,17 @@ def handle_map_client(conn, addr):
             msg_len = int(msg_len)
             msg = conn.recv(msg_len).decode(FORMAT)
             if msg == DISCONNECT_MSG:
+                print(f"{addr}: {msg}")
+                conn.send("Disconnect Received".encode(FORMAT))
                 connected = False
-            print(f"{addr}: {msg}")
-            conn.send("Message Received".encode(FORMAT))
+            else:
+                print(f"{addr}: {msg}")
+                if msg[-1] == ',':
+                    msg = msg[:-1]
+                map_coord = msg.split(',')
+                img_url = get_map_req_url(map_coord)
+                print('img tag:', img_url)
+                conn.send(img_url.encode(FORMAT))
 
     conn.close()
 
