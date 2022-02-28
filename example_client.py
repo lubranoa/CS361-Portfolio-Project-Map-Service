@@ -1,8 +1,10 @@
 # -----------------------------------------------------------------------------
 # Author: Alexander Lubrano
 # Course: CS 361 - Software Engineering I
-# Last Modified: 02/27/2022
-# Description: This program
+# Last Modified: 02/28/2022
+# Description: This is a basic client example. It sends a string of coordinates
+#     of the form "latitude,longitude", i.e. "33.5277,-112.262608" and receives
+#     a Mapbox Static Images API request URL from the running socket server.
 #
 # -----------------------------------------------------------------------------
 
@@ -26,9 +28,10 @@ def send(msg):
     client.send(send_length)
     client.send(message)
     img_url = client.recv(MSG_SIZE).decode(FORMAT)
-    return img_url
+    print(img_url)
+    # return img_url
 
 
-response = send('33.5277,-112.262608')
-print(response)
+send('33.5277,-112.262608')
+# print(response)
 send(DISCONNECT_MSG)

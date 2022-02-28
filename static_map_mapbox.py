@@ -1,20 +1,28 @@
 # -----------------------------------------------------------------------------
 # Author: Alexander Lubrano
 # Course: CS 361 - Software Engineering I
-# Last Modified: 02/27/2022
-# Description: This program
+# Last Modified: 02/28/2022
+# Description: This module generates a Mapbox Static Images API request URL
+#     when called by another program and returns it to the calling program. The
+#     URL should be placed in an HTML img element as a src property to display
+#     a static satellite map image of the sent coordinates. Mapbox API key does
+#     not need to be hidden because it has been restricted to specific URLs.
 #
 # -----------------------------------------------------------------------------
 
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-mapbox_key = os.getenv('MAPBOX_KEY')
+mapbox_key = 'pk.eyJ1IjoibHVicmFub2EiLCJhIjoiY2wwNXVqM3lvMDRpeDNvcnVwazJrZXlobyJ9.DgD1j9mF8jELE7_CJ_vKcw '
 
 
-def get_map_req_url(coord_data):
-    """Does this"""
+def get_map_req_url(coord_data: list):
+    """
+    Takes a latitude and a longitude and generates a Mapbox Static Images API
+    request URL to be added as a src property to an HTML img element on a web
+    page
+
+    :param coord_data: list containing [lat, long]
+    :return: string - API request URL
+    """
+
     print('Generating a static map URL for these coordinates:', coord_data)
     url_components = [
         'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/static/',
